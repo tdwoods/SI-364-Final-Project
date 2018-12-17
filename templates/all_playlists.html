@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+<h1> All Playlists </h1>
+{% endblock %}
+
+{% block main %}
+{% if playlists|length == 0 %}
+  <h2>No playlists to display </h2>
+{% else %}
+<ul>
+  {% for playlist in playlists %}
+    <h2><a href = "{{ url_for('view_playlist', playlist_name = playlist.name) }}"> {{ playlist.name }}</a></h2><br>
+    <form method = 'GET' action = "{{ url_for('update_playlist', playlist_name = playlist.name)}}">
+    {{ u_form.submit() }}
+    </form>
+    <form method = 'POST' action = "{{ url_for('delete_playlist', playlist_name = playlist.name)}}">
+    {{ d_form.submit() }}
+    </form>
+  {% endfor %}
+{% endif %}
+</ul>
+{% endblock %}

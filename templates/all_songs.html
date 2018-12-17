@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>All Songs </h1>
+{% endblock %}
+
+{% block main %}
+  {% if songs|length == 0 %}
+    <h2>No songs to display </h2>
+  {% else %}
+  <ul>
+    {% for song in songs %}
+      <img src = {{song.album_cover_url}}>
+      <h2> <a href = "{{ song.external_url}}"> {{ song.title }} </a></h2><br>
+      <ul>
+        <li> Aritst: {{ song. artist }} </li><br>
+        <li> Album: {{ song.album }} </li><br>
+        <li> Duration: {{ song.duration }} </li><br>
+      </ul>
+    {% endfor %}
+  </ul>
+  {% endif %}
+{% endblock %}

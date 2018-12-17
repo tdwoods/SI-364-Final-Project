@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}
+<h1> All Recommendation Lists </h1>
+{% endblock %}
+
+{% block main %}
+{% if recommendations|length == 0 %}
+  <h2>No recommendations to display </h2>
+{% else %}
+<ul>
+  {% for recommendation in recommendations %}
+    <h2><a href = "{{ url_for('view_recommendation', recommendation_id = recommendation.id) }}"> {{ recommendation.name }}</a></h2><br>
+  {% endfor %}
+{% endif %}
+</ul>
+{% endblock %}

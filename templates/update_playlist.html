@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+<h1> Update Playlist {{ playlist_name }} </h1>
+{% endblock %}
+
+{% block main %}
+  <form method = 'GET' action = ''>
+    {{ form.hidden_tag() }}
+    {{ form.name.label }} {{ form.name() }} <br>
+    {{ form.remove_songs.label }} {{ form.remove_songs() }}
+    {{ form.add_songs.label }} {{ form.add_songs() }} <br>
+    {{ form.submit() }}
+  </form>
+
+{% endblock %}

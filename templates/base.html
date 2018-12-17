@@ -1,0 +1,37 @@
+{% block title %}
+<h1> Search Song </h1>
+{% endblock %}
+
+{% if current_user.is_authenticated %}
+    <a href = "{{ url_for('logout') }}">Sign Out {{current_user.username}}</a>
+{% else %}
+    <a href = "{{ url_for('register') }}"> Register </a><br>
+    <a href = "{{ url_for('login') }}">Sign In</a>
+{% endif %}
+<br>
+<br>
+
+<ul><i>
+    <li><a href = "{{ url_for('index') }}">Search for songs</a></li>
+    <li><a href = "{{ url_for('all_songs') }}">See all songs</a></li>
+    <li><a href = "{{ url_for('create_playlist') }}">Create a playlist</a></li>
+    <li><a href = "{{ url_for('all_playlists') }}">See all playlists</a></li>
+    <li><a href = "{{ url_for('create_recommendation') }}">Create a recommendation list</a></li>
+    <li><a href = "{{ url_for('all_recommendations') }}">See all recommendation lists</a></li></i>
+</ul>
+<p>--------</p><br>
+
+{% block main %}
+<form method="POST">
+	{{ form.hidden_tag() }}
+	{{ form.search_query.label }} {{ form.search_query() }}
+	{{ form.submit() }}
+</form>
+
+{% endblock %}
+
+<div>
+{% for message in get_flashed_messages() %}
+{{ message }} <br>
+{% endfor %}
+</div>
