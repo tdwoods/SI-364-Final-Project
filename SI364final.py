@@ -1,3 +1,4 @@
+import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from flask import Flask, render_template, session, redirect, request, url_for, flash
@@ -16,9 +17,10 @@ app = Flask(__name__)
 app.debug = True
 app.use_reloader = True
 app.config['SECRET_KEY'] = 'who would ever guess this really hard string for my final project 364?'
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://localhost/tdwoods364final"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL') or "postgresql://localhost/tdwoods364final"
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['HEROKU_ON'] = os.environ.get('HEROKU')
 
 #Database Manager
 manager = Manager(app)
