@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block main %}
-  <form method = 'GET' action = ''>
+  <form method = 'POST'>
     {{ form.hidden_tag() }}
     {{ form.name.label }} {{ form.name() }} <br>
     {{ form.remove_songs.label }} {{ form.remove_songs() }}

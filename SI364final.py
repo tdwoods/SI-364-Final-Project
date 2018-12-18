@@ -271,9 +271,10 @@ def logout():
 
 @app.route('/', methods = ["GET","POST"])
 def index():
-    s_form = SongForm()
-    if s_form.validate_on_submit():
-        data = s_form.search_query.data.split(",")
+    s_form = SongForm(request.args)
+    print(request)
+    if request.args and s_form.validate():
+        data = request.args['search_query'].split(",")
         title = data[0]
         artist = data[1]
         get_or_create_song(title, artist)
@@ -318,21 +319,23 @@ def view_playlist(playlist_name):
 
 @app.route('/update_playlist/<playlist_name>', methods = ['GET', 'POST'])
 def update_playlist(playlist_name):
-    u_form = UpdatePlaylistForm(request.args)
+    u_form = UpdatePlaylistForm()
     playlist = get_or_create_playlist(name = playlist_name, current_user = current_user)
     add_song_choices = [(song.id, song.title + ' by ' + song.artist) for song in Song.query.all() if song not in playlist.songs.all()]
     remove_song_choices = [(song.id, song.title + ' by ' + song.artist) for song in playlist.songs.all()]
     u_form.add_songs.choices = add_song_choices
     u_form.remove_songs.choices = remove_song_choices
-    if u_form.validate():
-        if request.args['name'] == "":
+    if u_form.validate_on_submit():
+        if u_form.name.data == "":
             playlist.name = playlist_name
         else:
-            playlist.name = request.args['name']
-        remove_songs = [get_song_by_id(id) for id in request.args.get('remove_songs', [])]
-        add_songs = [get_song_by_id(id) for id in request.args.get('add_songs', [])]
-        for song in remove_songs: playlist.songs.remove(song)
-        for song in add_songs: playlist.songs.append(song)
+            playlist.name = u_form.name.data
+        remove_songs = [get_song_by_id(id) for id in u_form.remove_songs.data]
+        add_songs = [get_song_by_id(id) for id in u_form.add_songs.data]
+        for song in remove_songs:
+            playlist.songs.remove(song)
+        for song in add_songs:
+            playlist.songs.append(song)
         db.session.add(playlist)
         db.session.commit()
         if playlist_name == playlist.name:

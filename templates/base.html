@@ -22,7 +22,7 @@
 <p>--------</p><br>
 
 {% block main %}
-<form method="POST">
+<form method="GET" action = "">
 	{{ form.hidden_tag() }}
 	{{ form.search_query.label }} {{ form.search_query() }}
 	{{ form.submit() }}
