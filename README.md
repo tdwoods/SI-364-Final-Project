@@ -1,3 +1,46 @@
+ My project is going to be gathering data using the Spotipy API (Links to an external site.)Links to an external site.. Users will be able to search for songs and view data based on that song. They will be able to add searched songs to a specific playlist, view all of their playlists, and update or delete a playlist. Users will also be able to generate recommendations based on multiple songs and artists previously searched for. The one-to-many relationships are my relationships between users and playlists (one user with many playlists) and between recommendation and songs (one recommendation query with many songs). My many-to-many relationship is between songs and playlist; one playlist can have many songs and many playlists can have the same song. Listed below are all the templates and models I intend to create to make this project work.
+
+
+Templates:
+
+Base.html
+all_songs.html
+recommendations.html
+all_playlists.html
+view_playlist.html
+update_playlist.html
+404_error.html
+Models:
+
+Song
+Playlist
+Recommendation
+Forms:
+
+SongSearchForm
+PlaylistForm
+RecommendationForm
+UpdateButtonForm
+DeleteButtonForm
+Routes:
+
+/
+/song_search
+/all_songs
+/create_recommendation
+/create_playlist
+/all_playlists
+/view_playlist/<playlist>
+/update_playlist/<playlist>
+/delete_playlist/<playlist>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+** 
  Ensure that your SI364final.py file has all the setup (app.config values, import statements, code to run the app if that file is run, etc) necessary to run the Flask application, and the application runs correctly on http://localhost:5000 (and the other routes you set up). Your main file must be called SI364final.py, but of course you may include other files if you need.
 
  A user should be able to load http://localhost:5000 and see the first page they ought to see on the application.
@@ -36,7 +79,7 @@
  At least one request to a REST API that is based on data submitted in a WTForm OR data accessed in another way online (e.g. scraping with BeautifulSoup that does accord with other involved sites' Terms of Service, etc).
 
  Your application should use data from a REST API or other source such that the application processes the data in some way and saves some information that came from the source to the database (in some way).
- At least one WTForm that sends data with a GET request to a new page.
+ At least one WTForm that sends data with a GET request to a new page.**
 
  At least one WTForm that sends data with a POST request to the same page. (NOT counting the login or registration forms provided for you in class.)
 
